@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <script>
+      var w;
+function simpleMessage() {
+  alert('Welcome');
+};
+function startWorker() {
+  if (typeof Worker !== 'undefined') {
+    if (typeof w == 'undefined') {
+      console.log('worker test');
+      w = new Worker('worker.js');
+      console.log(w);
+    }
+    w.onmessage = (event) => {
+      alert('working');
+    };
+    w.postMessage('start');
+  } else {
+    alert('not working');
+  }
+};
+ function stopWorker() {
+  if (typeof w != 'undefined') {
+    w.terminate();
+    w = undefined;
+  }
+};
+
+    </script>
+  </head>
+  <body>
+    <h1>Web worker</h1>
+    <button onclick="simpleMessage()">Welcome</button>
+    <button onclick="startWorker()">startWorker</button>
+    <button onclick="stopWorker() ">stopWorker</button>
+  </body>
+</html>
